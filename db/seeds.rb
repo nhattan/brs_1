@@ -7,12 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 (1..15).each do |i|
   User.create(name: "User#{i}", email: "user#{i}@example.com",
-    password: "foobar", password_confirmation: "foobar")
+    password: "password", password_confirmation: "password")
 end
 
 (1..5).each do |i|
   Admin.create(name: "Admin#{i}", email: "admin#{i}@example.com",
-    password: "foobar", password_confirmation: "foobar")
+    password: "password", password_confirmation: "password")
 end
 
 categories = ["IT", "Sport", "Novel"]

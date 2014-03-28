@@ -1,0 +1,12 @@
+<% provide(:title, 'New') %>
+<h1>New</h1>
+
+<div class="row center">
+  <div class="span6 offset3">
+    <%= form_for @category, url: admin_categories_path do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.text_field :name, placeholder: "Name" %>
+      <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

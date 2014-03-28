@@ -1,0 +1,17 @@
+<% provide(:title, @category.name) %>
+
+<div class="center">
+  <h1>
+    <%= @category.name %>
+  </h1>
+  <h2>
+    <% if can? :edit, @category %>
+      <%= link_to "edit", edit_admin_category_path(@category) %>
+    <% end %>
+
+    <% if can? :destroy, @category %>
+      <%= link_to "delete", @admin_category, method: :delete,
+        confirm: "Are you sure?" %>
+    <% end %>
+  </h2>
+</div>

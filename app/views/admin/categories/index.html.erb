@@ -1,0 +1,17 @@
+<% provide(:title, 'Categories') %>
+<h1>Categories</h1>
+
+<h2>
+  <% if can? :create, Category %>
+    <%= link_to "New category", new_admin_category_path %>
+  <% end %>
+</h2>
+
+<div class="center">
+  <div class="btn-group-fluid">
+    <% @categories.each do |category| %>
+      <%= link_to category.name, admin_category_path(category),
+        class: "btn btn-large btn-default" %>
+    <% end %>
+  </div>
+</div>

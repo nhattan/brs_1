@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  
-  def show
-    @user = User.find params[:id]
+  load_and_authorize_resource
+
+  def destroy
+    user = User.find params[:id]
+    user.destroy
+    flash[:success] = "Deleted"
+    redirect_to users_url
   end
 end

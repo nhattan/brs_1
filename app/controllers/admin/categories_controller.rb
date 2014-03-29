@@ -1,6 +1,6 @@
 class Admin::CategoriesController < ApplicationController
   before_filter :authenticate_admin!
-  load_and_authorize_resource
+  load_and_authorize_resource param_method: :category_params
 
   def create
     @category = Category.new category_params

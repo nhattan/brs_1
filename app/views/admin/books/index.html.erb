@@ -1,0 +1,11 @@
+<% provide(:title, 'Books') %>
+<h1>Books</h1>
+<h2><%= link_to "New book", new_admin_book_path %></h2>
+
+<ul class="users">
+  <% @books.each do |book| %>
+    <li>
+      <%= link_to book.title, admin_book_path(book) %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,21 @@
+<% provide(:title, "Edit") %>
+<h1>Edit</h1>
+
+<div class="row center">
+  <div class="span6 offset3">
+    <%= form_for [:admin, @book] do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      Category
+      <%= f.collection_select :category_id, Category.all, :id, :name %>
+      <%= f.text_field :title, placeholder: "Title" %>
+      <%= f.text_field :page, placeholder: "Page" %>
+      <%= f.text_field :author, placeholder: "Author" %>
+      <%= f.text_area :summary, placeholder: "Summary" %>
+      Published date
+      <%= f.date_select :published_at %>
+
+      <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

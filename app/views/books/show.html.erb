@@ -1,0 +1,9 @@
+<% provide(:title, @book.title) %>
+
+<div class="center">
+  <h1><%= @book.title %></h1>
+  <h4>by <%= @book.author %></h4>
+  <h4><%= @book.page %> pages</h4>
+  <h4>Pulished: <%= @book.published_at.to_date %></h4>
+  <p><%= @book.summary %></p>
+</div>

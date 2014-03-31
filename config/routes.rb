@@ -7,11 +7,12 @@ Brs1::Application.routes.draw do
   devise_for :users
   devise_for :admins
 
-  resources :users, only: [:show, :index]
+  resources :users
   resources :admins
 
   namespace :admin do
     resources :categories
+    resources :users
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

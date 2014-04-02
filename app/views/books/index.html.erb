@@ -1,0 +1,33 @@
+<% provide(:title, "Books") %>
+<h1>Books</h1>
+
+<div class="row center">
+  <div class="span6 offset3">
+    <%= search_form_for @search do |f| %>
+      <%= f.text_field :title_cont, placeholder: "Title" %>
+      <%= f.collection_select :category_id_eq, @categories, :id, :name, 
+        prompt: "All" %>
+      <%= f.select :rating_eq, options_for_select(Book::RATINGS), 
+        prompt: "All" %>
+      <%= f.submit "Search", class: "btn" %>
+    <% end %>
+  </div>
+</div>
+
+<% if @books.count.zero? %>
+  <div>Not found</div>
+<% else %>
+  <table class="table">
+    <thead>
+      <td><%= sort_link(@search, :title, "Title") %></td>
+      <td><%= sort_link(@search, :rating, "Rating") %></td>
+    </thead>
+
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= link_to book.title, book %></td>
+        <td><%= book.rating %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

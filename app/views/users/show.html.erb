@@ -3,3 +3,47 @@
   <div><%= gravatar_for @user %></div>
   <div><%= @user.name %></div>
 </div>
+
+<table class="table">
+  <thead>Favorites</thead>
+
+  <% @user.user_books.favorite.each do |user_book| %>
+    <% book = user_book.book %>
+    <td><%= link_to book.title, book %></td>
+  <% end %>
+</table>
+
+<% if current_user?(@user) %>
+  <table class="table">
+    <thead>Requested</thead>
+
+    <% @user.user_books.requested.each do |user_book| %>
+      <% book = user_book.book %>
+      <td><%= link_to book.title, book %></td>
+    <% end %>
+  </table>
+
+  <table class="table">
+    <thead>Histories</thead>
+    <thead>
+      <td>Title</td>
+      <td>Status</td>
+      <td>Time</td>
+    </thead>
+
+    <% @user.user_books.history.each do |user_book| %>
+      <% book = user_book.book %>
+      <tr>
+        <td><%= link_to book.title, book %></td>
+        <td>
+          <% if user_book.read? %>
+            Read
+          <% else %>
+            Reading
+          <% end %>
+        </td>
+        <td><%= user_book.created_at.to_date %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  RATINGS = [1, 2, 3, 4, 5]
   validates :category_id, presence: true
   validates :title, presence: true
   validates :summary, presence: true

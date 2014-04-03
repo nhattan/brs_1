@@ -8,5 +8,5 @@ class Book < ActiveRecord::Base
   validates :published_at, presence: true
 
   belongs_to :category
-  has_many :reviews, dependent: :destroy
+  has_many :user_books, dependent: :destroy
 end

@@ -9,9 +9,7 @@ Brs1::Application.routes.draw do
 
   resources :users
   resources :admins
-  resources :books do
-    resources :reviews
-  end
+  resources :books
 
   namespace :admin do
     resources :categories

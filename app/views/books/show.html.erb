@@ -1,9 +1,33 @@
 <% provide(:title, @book.title) %>
 
- <div class="center">
-   <h1><%= @book.title %></h1>
-   <h4>by <%= @book.author %></h4>
-   <h4><%= @book.page %> pages</h4>
-   <h4>Pulished: <%= @book.published_at.to_date %></h4>
-   <p><%= @book.summary %></p>
- </div>
+<div class="center">
+  <h1><%= @book.title %></h1>
+  <h4>by <%= @book.author %></h4>
+  <h4><%= @book.page %> pages</h4>
+  <h4>Pulished: <%= @book.published_at.to_date %></h4>
+  <p><%= @book.summary %></p>
+</div>
+
+<% if user_signed_in? %>
+  <%= render "shared/review_form" %>
+<% else %>
+  <%= link_to "Signin to review", new_user_session_path %>
+<% end %>
+
+<div>Reviews</div>
+<ul class="users left">
+  <% @book.reviews.each do |review| %>
+    <li>
+      <% user = review.user %>
+      <%= link_to user.name, user %>
+      <%= review.content %> at
+      <%= review.created_at.to_date %>
+      
+      <% if user == current_user %>
+        <%= link_to "edit", edit_book_review_path(@book, review) %>
+        <%= link_to "delete", book_review_path(@book, review), method: :delete, 
+          confirm: "Are you sure?" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

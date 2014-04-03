@@ -6,4 +6,11 @@ class BooksController < ApplicationController
     @search = Book.search params[:q]
     @books = @search.result
   end
+
+  def show
+    @book = Book.find params[:id]
+    @reviews = @book.reviews
+    @review = Review.new
+    @review.book_id = @book.id
+  end
 end

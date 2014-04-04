@@ -28,6 +28,33 @@
         <%= link_to "delete", book_review_path(@book, review), method: :delete, 
           confirm: "Are you sure?" %>
       <% end %>
+
+      <ul>
+        <% review.comments.each do |comment| %>
+          <li>
+            <% user = comment.user %>
+            <%= link_to user.name, user %>
+            <%= comment.content %> at
+            <%= comment.created_at.to_date %>
+
+            <% if user == current_user %>
+              <%= link_to "edit", edit_book_review_comment_path(@book, review, comment) %>
+              <%= link_to "delete", book_review_comment_path(@book, review, comment), 
+                method: :delete, confirm: "Are you sure?" %>
+            <% end %>
+          </li>
+        <% end %>
+      
+        <% if user_signed_in? %>
+          <li>
+            <%= form_for [@book, review, Comment.new] do |f| %>
+              <%= render 'shared/error_messages', object: f.object %>
+                <%= f.text_field :content, placeholder: "Comment" %>
+              <%= f.submit "Post", class: "btn" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </li>
   <% end %>
 </ul>

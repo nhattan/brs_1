@@ -1,0 +1,2 @@
+$("#comments_<%= @comment.review.id %>").html("<%= escape_javascript(render @comment.review.comments) %>");
+$("#comment_form_<%= @comment.review.id %>").show();

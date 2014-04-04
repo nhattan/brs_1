@@ -1,0 +1,15 @@
+<li id="comment_<%= comment.id %>">
+  <% user = comment.user %>
+  <%= link_to user.name, user %>
+  <%= comment.content %> at
+  <%= comment.created_at.to_date %>
+
+  <% if user == current_user %>
+    <%= link_to "edit", 
+      edit_book_review_comment_path(@book, comment.review, comment), 
+        remote: true %>
+    <%= link_to "delete", 
+      book_review_comment_path(@book, comment.review, comment), remote: true,
+        method: :delete, confirm: "Are you sure?" %>
+  <% end %>
+</li>

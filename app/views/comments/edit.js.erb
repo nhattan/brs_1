@@ -1,0 +1,2 @@
+$("#comment_<%= @comment.id %>").html("<%= escape_javascript(render 'shared/edit_comment_form') %>");
+$("#comment_form_<%= @comment.review.id %>").hide();

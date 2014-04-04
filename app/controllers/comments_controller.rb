@@ -8,7 +8,10 @@ class CommentsController < ApplicationController
     @comment = @review.comments.build comment_params
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to @review.book
+      respond_to do |format|
+        format.html { redirect_to @book }
+        format.js
+      end
     else
       render "edit"
     end
@@ -23,16 +26,22 @@ class CommentsController < ApplicationController
     @review = Review.find params[:review_id]
     @book = @review.book
     if @comment.update_attributes comment_params
-      redirect_to @comment.review.book
+      respond_to do |format|
+        format.html { redirect_to @book }
+        format.js
+      end
     else
       render "edit"
     end
   end
 
   def destroy
-    comment = Comment.find params[:id]
-    comment.destroy
-    redirect_to comment.review.book
+    @comment = Comment.find params[:id]
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @comment.review.book }
+      format.js
+    end
   end
 
   private

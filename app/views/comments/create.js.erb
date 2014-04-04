@@ -1,0 +1,2 @@
+$("#comments_<%= @comment.review.id %>").append("<%= escape_javascript(render @comment) %>");
+$(":input:not(input[type=submit])").val("");

@@ -1,0 +1,8 @@
+<div class="create_read">
+  <% if @user_book %>
+    <%= render 'shared/update_read' %>
+  <% else %>
+    <%= link_to "Read", book_user_books_path(@book, id: @book.id, 
+      read: 1), method: :post, remote: true, class: "btn" %>
+  <% end %>
+</div>

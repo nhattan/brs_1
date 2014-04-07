@@ -1,0 +1,9 @@
+<div class="update_favorite">
+<% if @user_book.favorite? %>
+  <%= link_to "Unfavorite", book_user_books_path(@book, id: @book.id, 
+    favorite: 0), method: :put, remote: true, class: "btn btn-primary" %>
+<% else %>
+  <%= link_to "Favorite", book_user_books_path(@book, id: @book.id, 
+    favorite: 1), method: :put, remote: true, class: "btn" %>
+<% end %>
+</div>

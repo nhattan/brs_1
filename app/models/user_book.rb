@@ -10,4 +10,12 @@ class UserBook < ActiveRecord::Base
   def read?
     read == 1
   end
+
+  def favorite?
+    favorite == 1
+  end
+
+  def request?
+    request == 1
+  end
 end

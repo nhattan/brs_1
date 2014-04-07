@@ -9,6 +9,18 @@
 </div>
 
 <% if user_signed_in? %>
+  <div class="center">
+    <% @user_book = @book.user_books.find_by_user_id current_user.id %>
+    <% if @user_book %>
+      <%= render "shared/update_favorite" %>
+      <%= render "shared/update_read" %>
+      <%= render "shared/update_request" %>
+    <% else %>
+      <%= render "shared/create_favorite" %>
+      <%= render "shared/create_read" %>
+      <%= render "shared/create_request" %>
+    <% end %>
+  </div>
   <%= render "shared/review_form" %>
 <% else %>
   <%= link_to "Signin to review", new_user_session_path %>

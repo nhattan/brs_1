@@ -1,0 +1,7 @@
+<li id="comment_form_<%= review.id %>">
+  <%= form_for [@book, review, Comment.new], remote: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+      <%= f.text_field :content, placeholder: "Comment" %>
+    <%= f.submit "Post", class: "btn" %>
+  <% end %>
+</li>

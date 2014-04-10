@@ -13,6 +13,7 @@ Brs1::Application.routes.draw do
     resources :reviews do
       resources :comments
     end
+    resource :user_books
   end
   
   namespace :admin do

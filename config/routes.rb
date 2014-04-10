@@ -8,6 +8,9 @@ Brs1::Application.routes.draw do
   devise_for :admins
 
   resources :users
+  match "/users/:id/:follow", to: "users#index", as: "follow", via: "get"
+  resources :relationships, only: [:create, :destroy]
+  
   resources :admins
   resources :books do
     resources :reviews do

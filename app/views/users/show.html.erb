@@ -29,6 +29,8 @@
           <td><%= request.created_at.to_date %></td>
           <% if request.accepted? %>
             <td>Yes</td>
+          <% elsif request.canceled? %>
+            <td>No</td>
           <% else %>
             <td>Not yet</td>
           <% end %>

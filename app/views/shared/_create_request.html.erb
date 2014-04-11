@@ -1,8 +1,6 @@
 <div class="create_request">
-  <% if @user_book %>
-    <%= render 'shared/update_request' %>
-  <% else %>
-    <%= link_to "Request", book_user_books_path(@book, id: @book.id, 
-      request: 1), method: :post, remote: true, class: "btn" %>
+  <% @request = @book.requests.build user_id: current_user.id %>
+  <%= form_for [@book, @request], remote: true do |f| %>
+    <%= f.submit "Request", class: "btn" %>
   <% end %>
 </div>

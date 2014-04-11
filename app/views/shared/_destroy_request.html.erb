@@ -1,0 +1,5 @@
+<div class="destroy_request">
+  <%= form_for [@book, @request], method: :delete, remote: true do |f| %>
+    <%= f.submit "Unrequest", class: "btn btn-primary" %>
+  <% end %>
+</div>

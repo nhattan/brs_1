@@ -1,9 +1,0 @@
-<div class="update_request">
-  <% if @user_book.request? %>
-    <%= link_to "Unrequest", book_user_books_path(@book, id: @book.id, 
-      request: 0), method: :put, remote: true, class: "btn btn-primary" %>
-  <% else %>
-    <%= link_to "Request", book_user_books_path(@book, id: @book.id, 
-      request: 1), method: :put, remote: true, class: "btn" %>
-  <% end %>
-</div>

@@ -16,10 +16,25 @@
 <% if current_user?(@user) %>
   <table class="table">
     <thead>Requested</thead>
-
-    <% @user.user_books.requested.each do |user_book| %>
-      <% book = user_book.book %>
-      <td><%= link_to book.title, book %></td>
+    <thead>
+      <td>Title</td>
+      <td>Time</td>
+      <td>Acceppted</td>
+    </thead>
+    <% if @user.requests.any? %>
+      <% @user.requests.each do |request| %>
+        <% book = request.book %>
+        <tr>
+          <td><%= link_to book.title, book %></td>
+          <td><%= request.created_at.to_date %></td>
+          <% if request.accepted? %>
+            <td>Yes</td>
+          <% else %>
+            <td>Not yet</td>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </table>
 

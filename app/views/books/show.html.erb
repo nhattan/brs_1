@@ -14,10 +14,15 @@
     <% if @user_book %>
       <%= render "shared/update_favorite" %>
       <%= render "shared/update_read" %>
-      <%= render "shared/update_request" %>
     <% else %>
       <%= render "shared/create_favorite" %>
       <%= render "shared/create_read" %>
+    <% end %>
+
+    <% @request = @book.requests.find_by_user_id current_user.id %>
+    <% if @request.present? %>
+      <%= render "shared/destroy_request" %>
+    <% else %>
       <%= render "shared/create_request" %>
     <% end %>
   </div>

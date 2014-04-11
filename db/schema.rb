@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327074017) do
+ActiveRecord::Schema.define(version: 20140411034701) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 20140327074017) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "requests", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "accept",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "reviews", force: true do |t|
     t.integer  "user_id"

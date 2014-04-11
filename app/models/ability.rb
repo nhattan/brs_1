@@ -24,5 +24,6 @@ class Ability
   def user_rules(user)
     can :read, :all
     can :crud, [User, UserBook, Review, Comment, Activity]
+    can [:create, :destroy], Request
   end
 end

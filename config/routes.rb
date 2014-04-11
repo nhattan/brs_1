@@ -14,6 +14,7 @@ Brs1::Application.routes.draw do
       resources :comments
     end
     resource :user_books
+    resources :requests
   end
   
   namespace :admin do

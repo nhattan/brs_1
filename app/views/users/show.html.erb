@@ -2,6 +2,10 @@
 <div class="center">
   <div><%= gravatar_for @user %></div>
   <div><%= @user.name %></div>
+  <% if user_signed_in? %>
+    <div><%= render 'shared/stats' %></div>
+    <div><%= render 'follow_form' %></div>
+  <% end %>
 </div>
 
 <table class="table">

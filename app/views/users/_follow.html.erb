@@ -1,0 +1,5 @@
+<% relationship = current_user.relationships.build followed_id: @user.id %>
+<%= form_for relationship, remote: true do |f| %>
+  <%= f.hidden_field :followed_id %>
+  <%= f.submit "Follow", class: "btn" %>
+<% end %>

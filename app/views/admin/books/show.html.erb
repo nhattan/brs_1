@@ -13,3 +13,18 @@
   <h4>Pulished: <%= @book.published_at.to_date %></h4>
   <p><%= @book.summary %></p>
 </div>
+
+<h2>All requests</h2>
+<ul class="users">
+  <% @book.requests.each do |request| %>
+    <li>
+      <% unless request.accept.present? %>
+        <%= link_to request.user.name, request.user %> requested this book
+        <%= link_to "Accept", admin_book_request_path(@book, id: request.id, 
+          accept: 1), method: :put, class: "btn" %>
+        <%= link_to "Cancel", admin_book_request_path(@book, id: request.id, 
+          accept: 0), method: :put, class: "btn" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

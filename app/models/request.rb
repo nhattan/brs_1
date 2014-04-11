@@ -7,4 +7,8 @@ class Request < ActiveRecord::Base
   def accepted?
     accept == 1
   end
+
+  def canceled?
+    accept == 0
+  end
 end

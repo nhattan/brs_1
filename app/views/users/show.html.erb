@@ -6,6 +6,57 @@
     <div><%= render 'shared/stats' %></div>
     <div><%= render 'follow_form' %></div>
   <% end %>
+
+  <h1>History</h1>
+  <ul class="users">
+    <% @versions.each do |version| %>
+      <% user = User.find_by_id version.whodunnit %>
+      <% if user == @user %>
+        <% if version.item_type == "Comment" %>
+          <li>
+            <%= user.name %> commented on a review at
+            <% comment = Comment.find_by_id version.item_id %>
+            <%= link_to comment.review.book.title, comment.review.book %>
+          </li>
+        <% elsif version.item_type == "Review" %>
+          <li>
+            <%= user.name %> reviewed at
+            <% review = Review.find_by_id version.item_id %>
+            <%= link_to review.book.title, review.book %>
+          </li>
+        <% elsif version.item_type == "UserBook" %>
+          <li>
+            <% user_book = UserBook.find_by_id version.item_id %>
+            <% if user_book.read? %>
+              <%= user.name %> mark as read
+              <%= link_to user_book.book.title, user_book.book %>
+            <% elsif user_book.favorite? %>
+              <%= user.name %> mark as favorite
+              <%= link_to user_book.book.title, user_book.book %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      <% if version.item_type == "Relationship" %>
+        <% relationship = Relationship.find_by_id version.item_id %>
+        <% if relationship.present? %>
+          <% followed_user = User.find_by_id relationship.followed_id %>
+          <% follower_user = User.find_by_id relationship.follower_id %>
+          <% if @user == follower_user %>
+            <li>
+              <%= @user.name %> follows
+              <%= link_to followed_user.name, followed_user %>
+            </li>
+          <% elsif @user == followed_user %>
+            <li>
+              <%= @user.name %> is followed by
+              <%= link_to follower_user.name, follower_user %>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
 </div>
 
 <table class="table">

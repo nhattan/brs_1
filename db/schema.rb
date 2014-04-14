@@ -15,14 +15,16 @@ ActiveRecord::Schema.define(version: 20140414024352) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
-    t.integer  "relationship_id"
-    t.integer  "user_book_id"
-    t.integer  "review_id"
-    t.integer  "comment_id"
-    t.integer  "like",            default: 0
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "event"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "activities", ["object_id"], name: "index_activities_on_object_id"
+  add_index "activities", ["object_type"], name: "index_activities_on_object_type"
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id"
 
   create_table "admins", force: true do |t|
     t.string   "name"

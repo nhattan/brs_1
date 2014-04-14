@@ -1,7 +1,4 @@
 class UserBook < ActiveRecord::Base
-  has_paper_trail class_name: "PaperVersion"
-  has_paper_trail on: [:create, :update]
-  has_paper_trail only: [:read, :favorite]
   belongs_to :user
   belongs_to :book
 
@@ -9,6 +6,9 @@ class UserBook < ActiveRecord::Base
   scope :favorite, -> { where(favorite: 1) }
   scope :history, -> { where("read = ? OR reading = ?", 1, 1) }
   scope :requested, -> { where(request: 1) }
+
+  after_create :create_activity
+  after_update :update_activity
 
   def read?
     read == 1
@@ -21,4 +21,13 @@ class UserBook < ActiveRecord::Base
   def request?
     request == 1
   end
+
+  private
+    def create_activity
+      Activity.create(object: self, user: user, event: "create")
+    end
+
+    def update_activity
+      Activity.create(object: self, user: user, event: "update")
+    end
 end

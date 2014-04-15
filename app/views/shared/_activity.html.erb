@@ -28,18 +28,17 @@
 <% end %>
 
 <% if activity.followed? %>
+  <% relationship = Relationship.find_by_id activity.object.id %>
+  <% follower_user = User.find relationship.follower_id %>
+  <% followed_user = User.find relationship.followed_id %>
+  <li>  
+    <%= link_to follower_user.name, follower_user %>
+    follows
+    <%= link_to followed_user.name, followed_user %>
+  </li>
   <li>
-    <% relationship = Relationship.find_by_id activity.object.id %>
-    <% follower_user = User.find_by_id relationship.follower_id %>
-    <% followed_user = User.find_by_id relationship.followed_id %>
-    <% if @user == follower_user %>
-      <%= link_to follower_user.name, follower_user %>
-      follows
-      <%= link_to followed_user.name, followed_user %>
-    <% else %>
-      <%= link_to followed_user.name, followed_user %>
-      is followed by
-      <%= link_to follower_user.name, follower_user %>
-    <% end %>
+    <%= link_to followed_user.name, followed_user %>
+    is followed by
+    <%= link_to follower_user.name, follower_user %>
   </li>
 <% end %>

@@ -1,2 +1,10 @@
 <% provide(:title, 'Home') %>
 <h1>Book Review System</h1>
+
+<% if user_signed_in? %>
+  <ul class="users">
+    <% current_user.feeds.each do |feed| %>
+      <%= render "shared/activity", activity: feed %>
+    <% end %>
+  </ul>
+<% end %>

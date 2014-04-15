@@ -12,7 +12,7 @@ class Activity < ActiveRecord::Base
     self.event == "update"
   end
 
-  def follow?
+  def followed?
     creating? && self.object_type == "Relationship"
   end
 
@@ -27,4 +27,11 @@ class Activity < ActiveRecord::Base
   def marked?
     (creating? || updating?) && self.object_type == "UserBook"
   end
+
+  scope :filter, lambda { |user|
+    followed_ids = "SELECT followed_id FROM relationships 
+      WHERE follower_id = :user_id"
+    Activity.where("user_id IN (#{followed_ids}) OR user_id = :user_id", 
+      user_id: user.id)
+  }
 end

@@ -1,0 +1,45 @@
+<% if activity.commented? %>
+  <li>
+    <%= link_to activity.user.name, activity.user %>
+    commented on
+    <% comment = Comment.find_by_id activity.object.id %>
+    <%= link_to comment.review.book.title, comment.review.book %>
+  </li>
+<% elsif activity.reviewed? %>
+  <li>
+    <%= link_to activity.user.name, activity.user %>
+    reviewed on
+    <% review = Review.find_by_id activity.object.id %>
+    <%= link_to review.book.title, review.book %>
+  </li>
+<% elsif activity.marked? %>
+  <li>
+    <%= link_to activity.user.name, activity.user %>
+    marked
+    <% user_book = UserBook.find_by_id activity.object.id %>
+    <%= link_to user_book.book.title, user_book.book %>
+    as
+    <% if user_book.favorite? %>
+      favorite
+    <% elsif user_book.read? %>
+      read
+    <% end %>
+  </li>
+<% end %>
+
+<% if activity.follow? %>
+  <li>
+    <% relationship = Relationship.find_by_id activity.object.id %>
+    <% follower_user = User.find_by_id relationship.follower_id %>
+    <% followed_user = User.find_by_id relationship.followed_id %>
+    <% if @user == follower_user %>
+      <%= link_to follower_user.name, follower_user %>
+      follows
+      <%= link_to followed_user.name, followed_user %>
+    <% else %>
+      <%= link_to followed_user.name, followed_user %>
+      is followed by
+      <%= link_to follower_user.name, follower_user %>
+    <% end %>
+  </li>
+<% end %>

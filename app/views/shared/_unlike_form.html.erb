@@ -1,0 +1,9 @@
+<div class="unlike_<%= activity.id %>">
+  <%= form_for [activity, @like], method: :delete, remote: true do |f| %>
+    <%= f.submit "Unlike" %>
+  <% end %>
+
+  <% unless activity.likes.count.zero? %>
+    <%= activity.likes.count %> likes this
+  <% end %>
+</div>

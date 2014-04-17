@@ -11,6 +11,10 @@ Brs1::Application.routes.draw do
   match "/users/:id/:follow", to: "users#index", as: "follow", via: "get"
   resources :relationships, only: [:create, :destroy]
   
+  resources :activities do
+    resources :likes
+  end
+  
   resources :admins
   resources :books do
     resources :reviews do

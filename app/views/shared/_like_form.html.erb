@@ -1,0 +1,9 @@
+<div class="like_<%= activity.id %>">
+  <%= form_for [activity, Like.new], remote: true do |f| %>
+    <%= f.submit "Like" %>
+  <% end %>
+
+  <% unless activity.likes.count.zero? %>
+    <%= activity.likes.count %> likes this
+  <% end %>
+</div>

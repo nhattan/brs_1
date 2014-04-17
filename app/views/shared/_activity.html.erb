@@ -1,0 +1,51 @@
+<% if activity.commented? %>
+  <li>
+    <%= link_to activity.user.name, activity.user %>
+    commented on
+    <% comment = Comment.find_by_id activity.object.id %>
+    <%= link_to comment.review.book.title, comment.review.book %>
+  </li>
+<% elsif activity.reviewed? %>
+  <li>
+    <%= link_to activity.user.name, activity.user %>
+    reviewed on
+    <% review = Review.find_by_id activity.object.id %>
+    <%= link_to review.book.title, review.book %>
+  </li>
+<% elsif activity.marked? %>
+  <li>
+    <%= link_to activity.user.name, activity.user %>
+    marked
+    <% user_book = UserBook.find_by_id activity.object.id %>
+    <%= link_to user_book.book.title, user_book.book %>
+    as
+    <% if user_book.favorite? %>
+      favorite
+    <% elsif user_book.read? %>
+      read
+    <% end %>
+  </li>
+<% end %>
+
+<% if activity.followed? %>
+  <% relationship = Relationship.find_by_id activity.object.id %>
+  <% follower_user = User.find relationship.follower_id %>
+  <% followed_user = User.find relationship.followed_id %>
+  <li>  
+    <%= link_to follower_user.name, follower_user %>
+    follows
+    <%= link_to followed_user.name, followed_user %>
+  </li>
+  <li>
+    <%= link_to followed_user.name, followed_user %>
+    is followed by
+    <%= link_to follower_user.name, follower_user %>
+  </li>
+<% end %>
+
+<% @like = activity.likes.find_by_user_id current_user %>
+<% if @like.present? %>
+  <%= render "shared/unlike_form", activity: activity %>
+<% else %>
+  <%= render "shared/like_form", activity: activity %>
+<% end %>

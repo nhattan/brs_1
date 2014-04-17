@@ -1,4 +1,5 @@
 class Activity < ActiveRecord::Base
+  has_many :likes, dependent: :destroy
   belongs_to :user
   belongs_to :object, polymorphic: true
 

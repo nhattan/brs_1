@@ -11,4 +11,13 @@ class Book < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :user_books, dependent: :destroy
   has_many :requests, dependent: :destroy
+  has_many :ratings, dependent: :destroy
+
+  def avg_rating
+    if !ratings.length.zero?
+      ratings.average(:stars)
+    else
+      0
+    end
+  end
 end

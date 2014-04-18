@@ -25,5 +25,6 @@ class Ability
     can :read, :all
     can :crud, [User, UserBook, Review, Comment, Activity]
     can [:create, :destroy], Request
+    can [:create, :update], Rating
   end
 end

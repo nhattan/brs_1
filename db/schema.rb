@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414024352) do
+ActiveRecord::Schema.define(version: 20140417102410) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 20140414024352) do
   end
 
   add_index "paper_versions", ["item_type", "item_id"], name: "index_paper_versions_on_item_type_and_item_id"
+
+  create_table "ratings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "stars",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

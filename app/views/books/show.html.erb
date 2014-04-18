@@ -6,9 +6,21 @@
   <h4><%= @book.page %> pages</h4>
   <h4>Pulished: <%= @book.published_at.to_date %></h4>
   <p><%= @book.summary %></p>
+  Rating:
+  <div id="average_rating" style="display:inline;">
+    <%= @book.avg_rating %>
+  </div>
 </div>
 
 <% if user_signed_in? %>
+  <% @rating = @book.ratings.find_by_user_id current_user.id %>
+  
+  <% unless @rating.present? %>
+    <% @rating = @book.ratings.build user: current_user %>
+  <% end %>
+
+  <%= render "shared/rating_form" %>
+
   <div class="center">
     <% @user_book = @book.user_books.find_by_user_id current_user.id %>
     <% if @user_book %>

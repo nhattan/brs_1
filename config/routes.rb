@@ -18,6 +18,7 @@ Brs1::Application.routes.draw do
     end
     resource :user_books
     resources :requests
+    resources :ratings
   end
   
   namespace :admin do

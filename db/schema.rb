@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414024352) do
+ActiveRecord::Schema.define(version: 20140424064543) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -94,6 +94,26 @@ ActiveRecord::Schema.define(version: 20140414024352) do
     t.integer  "user_id"
     t.integer  "book_id"
     t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seems_rateable_cached_ratings", force: true do |t|
+    t.integer  "cacheable_id",   limit: 8
+    t.string   "cacheable_type"
+    t.float    "avg",                      null: false
+    t.integer  "cnt",                      null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seems_rateable_rates", force: true do |t|
+    t.integer  "rater_id",      limit: 8
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",                   null: false
+    t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

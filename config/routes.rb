@@ -1,4 +1,5 @@
 Brs1::Application.routes.draw do
+  seems_rateable
   root  "books#index"
   match "/help",    to: "static_pages#help",    via: "get"
   match "/about",   to: "static_pages#about",   via: "get"

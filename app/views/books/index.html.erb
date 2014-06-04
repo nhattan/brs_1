@@ -30,7 +30,7 @@
     <% @books.each do |book| %>
       <tr>
         <td><%= link_to book.title, book %></td>
-        <td><%= book.rating %></td>
+        <td><%= rating_for book, dimension: :quality %></td>
       </tr>
     <% end %>
   </table>

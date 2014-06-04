@@ -6,19 +6,15 @@
   <h4><%= @book.page %> pages</h4>
   <h4>Pulished: <%= @book.published_at.to_date %></h4>
   <p><%= @book.summary %></p>
-  
-  <% rate = @book.rates(:quality).find_by rater_id: current_user.id %>
-  <% if rate.present? %>
-    Your rate:
-    <div style="display:inline;">
-      <%= rate.stars %>
-    </div>
-  <% end %>
-  <%= rating_for @book, dimension: :quality %>
+  Rating: <%= @book.average(:quality).avg %>
 </div>
 
 <% if user_signed_in? %>
   <div class="center">
+    <div>
+      Your rate:
+      <%= rating_for @book, dimension: :quality %>
+    </div>
     <% @user_book = @book.user_books.find_by_user_id current_user.id %>
     <% if @user_book %>
       <%= render "shared/update_favorite" %>

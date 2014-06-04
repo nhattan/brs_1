@@ -18,10 +18,10 @@
       type : 'big', // can be set to 'small' or 'big'
 
       /** Boolean vars **/
-      step:false, // if true,  mouseover binded star by star,
+      step:true, // if true,  mouseover binded star by star,
       isDisabled:false,
       showRateInfo: false,
-      canRateAgain : false,
+      canRateAgain: false,
 
       /** Integer vars **/
       length:5, // number of star to display
@@ -114,7 +114,7 @@
           }).appendTo('body').show();
         },
         mouseover : function(e){
-          $(this).css('cursor','pointer');  
+          $(this).css('cursor','pointer');    
         },
         mouseout : function(){
           $(this).css('cursor','default');

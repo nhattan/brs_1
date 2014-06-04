@@ -3,6 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @categories = Category.all
+    @categories.unshift(Category.new(name: "All"))
     @search = Book.search params[:q]
     @books = @search.result
   end

@@ -5,10 +5,14 @@
   <div class="span6 offset3">
     <%= search_form_for @search do |f| %>
       <%= f.text_field :title_cont, placeholder: "Title" %>
-      <%= f.collection_select :category_id_eq, @categories, :id, :name, 
-        prompt: "All" %>
-      <%= f.select :rating_eq, options_for_select(Book::RATINGS), 
-        prompt: "All" %>
+      <%= f.collection_select :category_id_eq, @categories, :id, :name %>
+      Ratings:
+      <% Book::RATINGS.each do |rating| %>
+        <div>
+          <%= rating %>
+          <%= f.check_box(:rating_in, { :multiple => true }, rating, '') %>
+        </div>
+      <% end %>
       <%= f.submit "Search", class: "btn" %>
     <% end %>
   </div>
